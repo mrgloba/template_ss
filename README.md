@@ -1,5 +1,5 @@
 # Zabbix template for Windows Storage Spaces
-##Monitoring params:
+## Monitoring params:
   - pools (size, allocated size, operational status, health status)
   - enclosure (firmware version, number of slots, operational status, health status)
   - virtual disks (size, write cache size, is tiered, ssd tier size, hdd tier size, operational status, health status)
