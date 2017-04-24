@@ -1,2 +1,3 @@
-# template_ss
-Zabbix Template for monitor Windows Storage Spaces (Not Clustered)
+# Zabbix template for Windows Storage Spaces
+Monitoring params:
+  - pools (size, allocated size, operational status, health status)
