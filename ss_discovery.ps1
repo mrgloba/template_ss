@@ -7,7 +7,7 @@ switch ($dtype) {
 
         echo "{`n `"data`":[`n"
         foreach ($sp in $StoragePools) {
-            $line = "{ `n`"{#POOL}`":`"" + $sp.FriendlyName + "`",`n`"{#PDN}`":`"" + $sp.UniqueId + "`",`n`"{#PH}`":`"0`"`n}`n,"
+            $line = "{ `n`"{#POOL}`":`"" + $sp.FriendlyName + "`",`n`"{#PDN}`":`"" + $($sp.UniqueId -replace '[{}]') + "`",`n`"{#PH}`":`"0`"`n}`n,"
             echo $line
         }
 

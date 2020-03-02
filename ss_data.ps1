@@ -10,7 +10,7 @@ switch ($qtype) {
         $qparam = $args[1]
         $qid = $args[2]
         
-        $sp = Get-StoragePool -UniqueId "$qid"
+        $sp = Get-StoragePool -UniqueId "{$qid}"
         if (-not $sp) {
             echo "Object not found!"
             exit
