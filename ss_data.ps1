@@ -12,6 +12,9 @@ switch ($qtype) {
         
         $sp = Get-StoragePool -UniqueId "{$qid}"
         if (-not $sp) {
+            $sp = Get-StoragePool -UniqueId "$qid"
+        }
+        if (-not $sp) {
             echo "Object not found!"
             exit
         }
