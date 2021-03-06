@@ -1,103 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.2</version>
-    <date>2017-04-24T05:53:38Z</date>
+    <version>5.0</version>
+    <date>2021-03-05T23:53:47Z</date>
     <groups>
         <group>
-            <name>Templates</name>
+            <name>Templates/Server hardware</name>
         </group>
     </groups>
     <templates>
         <template>
             <template>Template Windows Storage Spaces</template>
             <name>Template Windows Storage Spaces</name>
-            <description/>
             <groups>
                 <group>
-                    <name>Templates</name>
+                    <name>Templates/Server hardware</name>
                 </group>
             </groups>
-            <applications/>
-            <items/>
             <discovery_rules>
                 <discovery_rule>
-                    <name>Discvery Storage Enclosures</name>
-                    <type>7</type>
-                    <snmp_community/>
-                    <snmp_oid/>
+                    <name>Discovery Storage Enclosures</name>
                     <key>storagespaces.discovery[enclosure]</key>
                     <delay>86400</delay>
-                    <status>0</status>
-                    <allowed_hosts/>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
                     <filter>
-                        <evaltype>0</evaltype>
-                        <formula/>
                         <conditions>
                             <condition>
                                 <macro>{#PH}</macro>
                                 <value>0</value>
-                                <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>1</lifetime>
-                    <description/>
                     <item_prototypes>
                         <item_prototype>
                             <name>Enclosure Firmware {#ENCLOSURE}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[enclosure,firmware,{#EDN}]</key>
                             <delay>86400</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Enclosures</name>
@@ -106,130 +46,50 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Enclosure Health Status {#ENCLOSURE}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[enclosure,healthstatus,{#EDN}]</key>
                             <delay>7200</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Enclosures</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(Healthy)}=0</expression>
+                                    <name>Health status warning on enclosure {#ENCLOSURE}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Enclosure Operational Status {#ENCLOSURE}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[enclosure,opstatus,{#EDN}]</key>
                             <delay>7200</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Enclosures</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(OK)}=0</expression>
+                                    <name>Operational status warning on enclosure {#ENCLOSURE}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Enclosure number of Slots {#ENCLOSURE}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[enclosure,slots,{#EDN}]</key>
                             <delay>86400</delay>
-                            <history>1</history>
-                            <trends>1</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <history>1d</history>
+                            <trends>1d</trends>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Enclosures</name>
@@ -237,121 +97,41 @@
                             </application_prototypes>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes>
-                        <trigger_prototype>
-                            <expression>{Template Windows Storage Spaces:storagespaces.data[enclosure,healthstatus,{#EDN}].regexp(Healthy)}=0</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Health status warning on enclosure {#ENCLOSURE}</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template Windows Storage Spaces:storagespaces.data[enclosure,opstatus,{#EDN}].regexp(OK)}=0</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Operational status warning on enclosure {#ENCLOSURE}</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                    </trigger_prototypes>
-                    <graph_prototypes/>
-                    <host_prototypes/>
                 </discovery_rule>
                 <discovery_rule>
-                    <name>Discvery Physical Disks</name>
-                    <type>7</type>
-                    <snmp_community/>
-                    <snmp_oid/>
+                    <name>Discovery Physical Disks</name>
                     <key>storagespaces.discovery[pdisks]</key>
                     <delay>86400</delay>
-                    <status>0</status>
-                    <allowed_hosts/>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
                     <filter>
-                        <evaltype>0</evaltype>
-                        <formula/>
                         <conditions>
                             <condition>
                                 <macro>{#PH}</macro>
                                 <value>0</value>
-                                <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>1</lifetime>
-                    <description/>
                     <item_prototypes>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) firmware</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,firmware,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) flush latency max</name>
+                            <key>storagespaces.data[pdisks,flushlatency,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>ms</units>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
@@ -360,86 +140,31 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) healthstatus</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,healthstatus,{#PDN}]</key>
-                            <delay>86400</delay>
-                            <history>30</history>
+                            <delay>600</delay>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(Healthy)}=0</expression>
+                                    <name>Health status warning on physical disk {#PDISK}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) manufacturer</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,manufacturer,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
@@ -448,42 +173,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) media type</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,mediatype,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
@@ -492,42 +186,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) model</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,model,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
@@ -536,86 +199,55 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) opstatus</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,opstatus,{#PDN}]</key>
-                            <delay>86400</delay>
-                            <history>30</history>
+                            <delay>600</delay>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(OK)}=0</expression>
+                                    <name>Operational status warning on physical disk {#PDISK}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) read errors</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,readerrors,{#PDN}]</key>
                             <delay>7200</delay>
-                            <history>30</history>
-                            <trends>90</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <history>30d</history>
+                            <trends>90d</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}&gt;0</expression>
+                                    <name>Physical disk ({#PDISK}) read errors</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{change()}&lt;&gt;0 and {last()}&lt;&gt;0</expression>
+                                    <name>Physical disk ({#PDISK}) read errors change</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) read latency max</name>
+                            <key>storagespaces.data[pdisks,readlatency,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>ms</units>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
@@ -624,42 +256,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) size</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,size,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <units>B</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
@@ -668,42 +269,10 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) slot number</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,slot,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
@@ -712,86 +281,31 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) temperature</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,temperature,{#PDN}]</key>
                             <delay>7200</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <units>C</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}&gt;50</expression>
+                                    <name>Physical disk ({#PDISK}) temperature warning</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) temperature max</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,temperaturemax,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <units>C</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
@@ -800,130 +314,63 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) usage</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,usage,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
                                 </application_prototype>
                             </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) wear level</name>
+                            <key>storagespaces.data[pdisks,wear,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>30d</history>
+                            <trends>90d</trends>
+                            <units>%</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}&gt;50</expression>
+                                    <name>Physical disk ({#PDISK}) wear level warning</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Physical disk ({#PDISK}) write errors</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pdisks,writeerrors,{#PDN}]</key>
                             <delay>7200</delay>
-                            <history>30</history>
-                            <trends>90</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <history>30d</history>
+                            <trends>90d</trends>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}&gt;0</expression>
+                                    <name>Physical disk ({#PDISK}) write errors</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
-                            <name>Physical disk ({#PDISK}) write latency</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
+                            <name>Physical disk ({#PDISK}) write latency max</name>
                             <key>storagespaces.data[pdisks,writelatency,{#PDN}]</key>
                             <delay>7200</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <units>ms</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Physical Disks</name>
@@ -931,121 +378,28 @@
                             </application_prototypes>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes>
-                        <trigger_prototype>
-                            <expression>{Template Windows Storage Spaces:storagespaces.data[pdisks,healthstatus,{#PDN}].regexp(Healthy)}=0</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Health status warning on physical disk {#PDISK}</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template Windows Storage Spaces:storagespaces.data[pdisks,opstatus,{#PDN}].regexp(OK)}=0</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Operational status warning on physical disk {#PDISK}</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                    </trigger_prototypes>
-                    <graph_prototypes/>
-                    <host_prototypes/>
                 </discovery_rule>
                 <discovery_rule>
-                    <name>Discvery Storage Pool</name>
-                    <type>7</type>
-                    <snmp_community/>
-                    <snmp_oid/>
+                    <name>Discovery Storage Pool</name>
                     <key>storagespaces.discovery[pool]</key>
                     <delay>86400</delay>
-                    <status>0</status>
-                    <allowed_hosts/>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
                     <filter>
-                        <evaltype>0</evaltype>
-                        <formula/>
                         <conditions>
                             <condition>
                                 <macro>{#PH}</macro>
                                 <value>0</value>
-                                <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>3</lifetime>
-                    <description/>
                     <item_prototypes>
                         <item_prototype>
                             <name>Pool allocated size {#POOL}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pool,allocated,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>10</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
+                            <history>7d</history>
+                            <trends>10d</trends>
                             <units>B</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Pools</name>
@@ -1054,130 +408,51 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Health status {#POOL}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pool,healthstatus,{#PDN}]</key>
-                            <delay>7200</delay>
-                            <history>7</history>
+                            <delay>600</delay>
+                            <history>7d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Pools</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(Healthy)}=0</expression>
+                                    <name>Health status warning on pool {#POOL}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Operational status {#POOL}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pool,opstatus,{#PDN}]</key>
-                            <delay>7200</delay>
-                            <history>7</history>
+                            <delay>600</delay>
+                            <history>7d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Pools</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(OK)}=0</expression>
+                                    <name>Operational status warning on pool {#POOL}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Pool size {#POOL}</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[pool,size,{#PDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>10</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
+                            <history>7d</history>
+                            <trends>10d</trends>
                             <units>B</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Pools</name>
@@ -1185,121 +460,27 @@
                             </application_prototypes>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes>
-                        <trigger_prototype>
-                            <expression>{Template Windows Storage Spaces:storagespaces.data[pool,healthstatus,{#PDN}].regexp(Healthy)}=0</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Health status warning on pool {#POOL}</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template Windows Storage Spaces:storagespaces.data[pool,opstatus,{#PDN}].regexp(OK)}=0</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Operational status warning on pool {#POOL}</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                    </trigger_prototypes>
-                    <graph_prototypes/>
-                    <host_prototypes/>
                 </discovery_rule>
                 <discovery_rule>
-                    <name>Discvery Virtual Disks</name>
-                    <type>7</type>
-                    <snmp_community/>
-                    <snmp_oid/>
+                    <name>Discovery Virtual Disks</name>
                     <key>storagespaces.discovery[vdisks]</key>
                     <delay>86400</delay>
-                    <status>0</status>
-                    <allowed_hosts/>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
                     <filter>
-                        <evaltype>0</evaltype>
-                        <formula/>
                         <conditions>
                             <condition>
                                 <macro>{#PH}</macro>
                                 <value>0</value>
-                                <operator>8</operator>
                                 <formulaid>A</formulaid>
                             </condition>
                         </conditions>
                     </filter>
-                    <lifetime>1</lifetime>
-                    <description/>
                     <item_prototypes>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} data columns</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,columns,{#VDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
@@ -1308,42 +489,10 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} data copyes</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,datacopyes,{#VDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
@@ -1352,42 +501,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} HDD tier size</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,hddtiersize,{#VDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <units>B</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
@@ -1396,86 +514,30 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} health status</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,healthstatus,{#VDN}]</key>
-                            <delay>7200</delay>
-                            <history>30</history>
+                            <delay>600</delay>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(Healthy)}=0</expression>
+                                    <name>Health status warning on virtual disk {#VDISK}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} tiered</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,istiered,{#VDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
@@ -1484,86 +546,31 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} operational status</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,opstatus,{#VDN}]</key>
-                            <delay>7200</delay>
-                            <history>30</history>
+                            <delay>600</delay>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
                                 </application_prototype>
                             </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(OK)}=0</expression>
+                                    <name>Operational status warning on virtual disk {#VDISK}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} resiliency type</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,resiliency,{#VDN}]</key>
                             <delay>86400</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
@@ -1572,42 +579,10 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} size</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,size,{#VDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
@@ -1616,42 +591,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} SSD tier size</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,ssdtiersize,{#VDN}]</key>
                             <delay>86400</delay>
-                            <history>7</history>
-                            <trends>30</trends>
-                            <status>0</status>
-                            <value_type>3</value_type>
-                            <allowed_hosts/>
+                            <history>7d</history>
+                            <trends>30d</trends>
                             <units>B</units>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
@@ -1660,42 +604,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Virtual disk {#VDISK} storage pool</name>
-                            <type>7</type>
-                            <snmp_community/>
-                            <multiplier>0</multiplier>
-                            <snmp_oid/>
                             <key>storagespaces.data[vdisks,storagepool,{#VDN}]</key>
                             <delay>86400</delay>
-                            <history>30</history>
+                            <history>30d</history>
                             <trends>0</trends>
-                            <status>0</status>
-                            <value_type>4</value_type>
-                            <allowed_hosts/>
-                            <units/>
-                            <delta>0</delta>
-                            <snmpv3_contextname/>
-                            <snmpv3_securityname/>
-                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                            <snmpv3_authpassphrase/>
-                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                            <snmpv3_privpassphrase/>
-                            <formula>1</formula>
-                            <delay_flex/>
-                            <params/>
-                            <ipmi_sensor/>
-                            <data_type>0</data_type>
-                            <authtype>0</authtype>
-                            <username/>
-                            <password/>
-                            <publickey/>
-                            <privatekey/>
-                            <port/>
-                            <description/>
-                            <inventory_link>0</inventory_link>
-                            <applications/>
-                            <valuemap/>
-                            <logtimefmt/>
+                            <value_type>TEXT</value_type>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Storage Spaces Virtual Disks</name>
@@ -1703,48 +616,663 @@
                             </application_prototypes>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes>
-                        <trigger_prototype>
-                            <expression>{Template Windows Storage Spaces:storagespaces.data[vdisks,healthstatus,{#VDN}].regexp(Healthy)}=0</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Health status warning on virtual disk {#VDISK}</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
-                            <expression>{Template Windows Storage Spaces:storagespaces.data[vdisks,opstatus,{#VDN}].regexp(OK)}=0</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
-                            <name>Operational status warning on virtual disk {#VDISK}</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                    </trigger_prototypes>
-                    <graph_prototypes/>
-                    <host_prototypes/>
                 </discovery_rule>
             </discovery_rules>
-            <httptests/>
-            <macros/>
-            <templates/>
-            <screens/>
+        </template>
+        <template>
+            <template>Template Windows Storage Spaces Active</template>
+            <name>Template Windows Storage Spaces Active</name>
+            <groups>
+                <group>
+                    <name>Templates/Server hardware</name>
+                </group>
+            </groups>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Discovery Storage Enclosures</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>storagespaces.discovery[enclosure]</key>
+                    <delay>86400</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#PH}</macro>
+                                <value>0</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Enclosure Firmware {#ENCLOSURE}</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[enclosure,firmware,{#EDN}]</key>
+                            <delay>86400</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Enclosures</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Enclosure Health Status {#ENCLOSURE}</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[enclosure,healthstatus,{#EDN}]</key>
+                            <delay>7200</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Enclosures</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(Healthy)}=0</expression>
+                                    <name>Health status warning on enclosure {#ENCLOSURE}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Enclosure Operational Status {#ENCLOSURE}</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[enclosure,opstatus,{#EDN}]</key>
+                            <delay>7200</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Enclosures</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(OK)}=0</expression>
+                                    <name>Operational status warning on enclosure {#ENCLOSURE}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Enclosure number of Slots {#ENCLOSURE}</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[enclosure,slots,{#EDN}]</key>
+                            <delay>86400</delay>
+                            <history>1d</history>
+                            <trends>1d</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Enclosures</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Discovery Physical Disks</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>storagespaces.discovery[pdisks]</key>
+                    <delay>86400</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#PH}</macro>
+                                <value>0</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) firmware</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,firmware,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) flush latency max</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,flushlatency,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>ms</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) healthstatus</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,healthstatus,{#PDN}]</key>
+                            <delay>600</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(Healthy)}=0</expression>
+                                    <name>Health status warning on physical disk {#PDISK}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) manufacturer</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,manufacturer,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) media type</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,mediatype,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) model</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,model,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) opstatus</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,opstatus,{#PDN}]</key>
+                            <delay>600</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(OK)}=0</expression>
+                                    <name>Operational status warning on physical disk {#PDISK}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) read errors</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,readerrors,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>30d</history>
+                            <trends>90d</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}&gt;0</expression>
+                                    <name>Physical disk ({#PDISK}) read errors</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{change()}&lt;&gt;0 and {last(#1)}&lt;&gt;0</expression>
+                                    <name>Physical disk ({#PDISK}) read errors change</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) read latency max</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,readlatency,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>ms</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) size</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,size,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>B</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) slot number</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,slot,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) temperature</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,temperature,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>C</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}&gt;50</expression>
+                                    <name>Physical disk ({#PDISK}) temperature warning</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) temperature max</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,temperaturemax,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>C</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) usage</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,usage,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) wear level</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,wear,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>30d</history>
+                            <trends>90d</trends>
+                            <units>%</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}&gt;50</expression>
+                                    <name>Physical disk ({#PDISK}) wear level warning</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) write errors</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,writeerrors,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>30d</history>
+                            <trends>90d</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}&gt;0</expression>
+                                    <name>Physical disk ({#PDISK}) write errors</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{change()}&lt;&gt;0 and {last(#1)}&lt;&gt;0</expression>
+                                    <name>Physical disk ({#PDISK}) write errors change</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Physical disk ({#PDISK}) write latency max</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pdisks,writelatency,{#PDN}]</key>
+                            <delay>7200</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>ms</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Physical Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Discovery Storage Pool</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>storagespaces.discovery[pool]</key>
+                    <delay>86400</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#PH}</macro>
+                                <value>0</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Pool allocated size {#POOL}</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pool,allocated,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>10d</trends>
+                            <units>B</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Pools</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Health status {#POOL}</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pool,healthstatus,{#PDN}]</key>
+                            <delay>600</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Pools</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(Healthy)}=0</expression>
+                                    <name>Health status warning on pool {#POOL}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Operational status {#POOL}</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pool,opstatus,{#PDN}]</key>
+                            <delay>600</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Pools</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(OK)}=0</expression>
+                                    <name>Operational status warning on pool {#POOL}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Pool size {#POOL}</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[pool,size,{#PDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>10d</trends>
+                            <units>B</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Pools</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Discovery Virtual Disks</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>storagespaces.discovery[vdisks]</key>
+                    <delay>86400</delay>
+                    <filter>
+                        <conditions>
+                            <condition>
+                                <macro>{#PH}</macro>
+                                <value>0</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} data columns</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,columns,{#VDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} data copyes</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,datacopyes,{#VDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} HDD tier size</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,hddtiersize,{#VDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>B</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} health status</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,healthstatus,{#VDN}]</key>
+                            <delay>600</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(Healthy)}=0</expression>
+                                    <name>Health status warning on virtual disk {#VDISK}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} tiered</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,istiered,{#VDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} operational status</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,opstatus,{#VDN}]</key>
+                            <delay>600</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{regexp(OK)}=0</expression>
+                                    <name>Operational status warning on virtual disk {#VDISK}</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} resiliency type</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,resiliency,{#VDN}]</key>
+                            <delay>86400</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} size</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,size,{#VDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} SSD tier size</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,ssdtiersize,{#VDN}]</key>
+                            <delay>86400</delay>
+                            <history>7d</history>
+                            <trends>30d</trends>
+                            <units>B</units>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Virtual disk {#VDISK} storage pool</name>
+                            <type>ZABBIX_ACTIVE</type>
+                            <key>storagespaces.data[vdisks,storagepool,{#VDN}]</key>
+                            <delay>86400</delay>
+                            <history>30d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <application_prototypes>
+                                <application_prototype>
+                                    <name>Storage Spaces Virtual Disks</name>
+                                </application_prototype>
+                            </application_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
         </template>
     </templates>
 </zabbix_export>

@@ -99,7 +99,7 @@ switch ($qtype) {
 
         $pd = Get-PhysicalDisk -UniqueId "$qid"
 
-        if ($qparam -in ("readlatency","writelatency","readerrors","writeerrors","poweronhours","temperature","temperaturemax")) {
+        if ($qparam -in ("readlatency","writelatency","readerrors","writeerrors","poweronhours","temperature","temperaturemax","wear","flushlatency")) {
             $opsdata = Get-StorageReliabilityCounter -PhysicalDisk $pd
         }
         
@@ -125,7 +125,9 @@ switch ($qtype) {
             "opstatus" { echo $pd.OperationalStatus }
             "healthstatus" { echo $pd.HealthStatus }
             "readlatency" { echo $opsdata.ReadLatencyMax }
+            "flushlatency" { echo $opsdata.FlushLatencyMax }
             "writelatency" { echo $opsdata.WriteLatencyMax }
+            "wear" { echo $opsdata.Wear }
             "readerrors" { if ( $opsdata.ReadErrorsTotal -eq 0 -Or $opsdata.ReadErrorsTotal -gt 0 ) { echo $opsdata.ReadErrorsTotal } else { echo 0 } }
             "writeerrors" { if ( $opsdata.WriteErrorsTotal -eq 0 -Or $opsdata.WriteErrorsTotal -gt 0 ) { echo $opsdata.ReadErrorsTotal } else { echo 0 } }
             "poweronhours" { echo $opsdata.PowerOnHours }
@@ -136,7 +138,7 @@ switch ($qtype) {
     }
 
     default {
-        echo "Query type is not walid!"
+        echo "Query type is not valid!"
         exit
     }
 }

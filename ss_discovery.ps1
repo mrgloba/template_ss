@@ -60,5 +60,3 @@ switch ($dtype) {
         echo " ]`n}"     
     }
 }
-    
-
